@@ -2,6 +2,7 @@ class Gameboard {
   constructor(length, width) {
     this.grid = [...new Array(length)].map(() => [...new Array(width)]);
     this.missedShots = [];
+    this.ships = [];
   }
 
   placeShip(ship, x, y) {
@@ -23,6 +24,10 @@ class Gameboard {
     } else {
       this.missedShots.push({ x: x, y: y });
     }
+  }
+
+  isGameOver() {
+    return this.ships.every((ship) => ship.isSunk() === true);
   }
 }
 

@@ -58,4 +58,20 @@ describe('missed attack', () => {
 
 describe('check whether all ships are sunk', () => {
   const gameboard = new Gameboard(10, 10);
+  const ship1 = new Ship('destroyer', 2);
+  const ship2 = new Ship('submarine', 3);
+  gameboard.ships.push(ship1, ship2);
+  gameboard.placeShip(ship1, 1, 2);
+  ship2.changeDirection();
+  gameboard.placeShip(ship2, 4, 3);
+
+  gameboard.receiveAttack(1, 2);
+  gameboard.receiveAttack(1, 3);
+
+  gameboard.receiveAttack(4, 3);
+  gameboard.receiveAttack(5, 3);
+  gameboard.receiveAttack(6, 3);
+  test('All ships destroyed', () => {
+    expect(gameboard.isGameOver()).toBe(true);
+  });
 });
