@@ -1,6 +1,7 @@
 class Gameboard {
   constructor(length, width) {
     this.grid = [...new Array(length)].map(() => [...new Array(width)]);
+    this.missedShots = [];
   }
 
   placeShip(ship, x, y) {
@@ -16,8 +17,12 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    let ship = this.grid[x][y].ship;
-    ship.hit(this.grid[x][y].index);
+    if (this.grid[x][y]) {
+      let ship = this.grid[x][y].ship;
+      ship.hit(this.grid[x][y].index);
+    } else {
+      this.missedShots.push({ x: x, y: y });
+    }
   }
 }
 

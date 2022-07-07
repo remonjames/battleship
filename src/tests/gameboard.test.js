@@ -45,3 +45,17 @@ describe('receive attack function', () => {
     expect(gameboard.grid[1][3].ship.lives).toEqual([undefined, 'X']);
   });
 });
+
+describe('missed attack', () => {
+  const gameboard = new Gameboard(10, 10);
+  gameboard.receiveAttack(1, 3);
+  test('receive attack at (1,3)', () => {
+    expect(gameboard.missedShots).toEqual(
+      expect.arrayContaining([{ x: 1, y: 3 }])
+    );
+  });
+});
+
+describe('check whether all ships are sunk', () => {
+  const gameboard = new Gameboard(10, 10);
+});
