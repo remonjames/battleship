@@ -16,6 +16,10 @@ describe('10x10 Gameboard', () => {
   test('board has 10 columns', () => {
     expect(gameboard.grid[0].length).toBe(10);
   });
+  test('default ships', () => {
+    gameboard.createShips();
+    expect(gameboard.ships.length).toBe(5);
+  });
 });
 
 describe('place ship function', () => {

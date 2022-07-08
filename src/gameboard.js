@@ -1,8 +1,24 @@
+import Ship from './ship';
+
 class Gameboard {
   constructor(length, width) {
     this.grid = [...new Array(length)].map(() => [...new Array(width)]);
     this.missedShots = [];
     this.ships = [];
+  }
+
+  createShips() {
+    const defaultShips = {
+      carrier: 5,
+      battleship: 4,
+      cruiser: 3,
+      submarine: 3,
+      destroyer: 2,
+    };
+
+    for (let [ship, length] of Object.entries(defaultShips)) {
+      this.ships.push(new Ship(ship, length));
+    }
   }
 
   placeShip(ship, x, y) {
