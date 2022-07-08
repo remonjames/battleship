@@ -65,26 +65,20 @@ describe('check whether all ships are sunk', () => {
   ship2.changeDirection();
   gameboard.placeShip(ship2, 4, 3);
 
-  describe('No ships destroyed', () => {
-    test('No ships destroyed', () => {
-      expect(gameboard.isGameOver()).toBe(false);
-    });
+  test('No ships destroyed', () => {
+    expect(gameboard.isGameOver()).toBe(false);
   });
 
-  describe('One ship destroyed', () => {
-    test('One ship destroyed', () => {
-      gameboard.receiveAttack(1, 2);
-      gameboard.receiveAttack(1, 3);
-      expect(gameboard.isGameOver()).toBe(false);
-    });
+  test('One ship destroyed', () => {
+    gameboard.receiveAttack(1, 2);
+    gameboard.receiveAttack(1, 3);
+    expect(gameboard.isGameOver()).toBe(false);
   });
 
-  describe('No ships destroyed', () => {
-    test('All ships destroyed', () => {
-      gameboard.receiveAttack(4, 3);
-      gameboard.receiveAttack(5, 3);
-      gameboard.receiveAttack(6, 3);
-      expect(gameboard.isGameOver()).toBe(true);
-    });
+  test('All ships destroyed', () => {
+    gameboard.receiveAttack(4, 3);
+    gameboard.receiveAttack(5, 3);
+    gameboard.receiveAttack(6, 3);
+    expect(gameboard.isGameOver()).toBe(true);
   });
 });
