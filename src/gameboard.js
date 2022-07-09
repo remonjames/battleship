@@ -22,14 +22,18 @@ class Gameboard {
   }
 
   placeShip(ship, x, y) {
-    if (ship.isHorizontal) {
-      for (let i = 0; i < ship.length; i++) {
-        this.grid[x][y + i] = { ship: ship, index: i };
+    if (this.isValidPlacement(ship, x, y)) {
+      if (ship.isHorizontal) {
+        for (let i = 0; i < ship.length; i++) {
+          this.grid[x][y + i] = { ship: ship, index: i };
+        }
+      } else {
+        for (let i = 0; i < ship.length; i++) {
+          this.grid[x + i][y] = { ship: ship, index: i };
+        }
       }
     } else {
-      for (let i = 0; i < ship.length; i++) {
-        this.grid[x + i][y] = { ship: ship, index: i };
-      }
+      return false;
     }
   }
 
@@ -40,6 +44,16 @@ class Gameboard {
     } else {
       this.missedShots.push({ x: x, y: y });
     }
+  }
+
+  isValidPlacement(ship, x, y) {
+    if (ship.isHorizontal) {
+      if (y + ship.length > this.grid.length) return false;
+    } else {
+      if (x + ship.length > this.grid[0].length) return false;
+    }
+
+    return true;
   }
 
   isGameOver() {

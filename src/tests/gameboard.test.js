@@ -40,6 +40,19 @@ describe('place ship function', () => {
   });
 });
 
+describe('place ship at invalid position', () => {
+  const gameboard = new Gameboard(10, 10);
+  const ship = new Ship('destroyer', 2);
+  test('place ship out of bounds of board', () => {
+    expect(gameboard.placeShip(ship, 0, 9)).toBe(false);
+  });
+  const ship2 = new Ship('submarine', 3);
+  ship2.changeDirection();
+  test('place vertical ship out of bounds', () => {
+    expect(gameboard.placeShip(ship2, 8, 0)).toBe(false);
+  });
+});
+
 describe('receive attack function', () => {
   const gameboard = new Gameboard(10, 10);
   const ship = new Ship('destroyer', 2);
