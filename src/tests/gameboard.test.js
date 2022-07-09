@@ -51,6 +51,10 @@ describe('place ship at invalid position', () => {
   test('place vertical ship out of bounds', () => {
     expect(gameboard.placeShip(ship2, 8, 0)).toBe(false);
   });
+  gameboard.placeShip(ship, 0, 0);
+  test('collision with placed ships', () => {
+    expect(gameboard.placeShip(ship2, 0, 0)).toBe(false);
+  });
 });
 
 describe('receive attack function', () => {

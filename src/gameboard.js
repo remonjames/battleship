@@ -47,10 +47,20 @@ class Gameboard {
   }
 
   isValidPlacement(ship, x, y) {
+    //Check if coordinates will put ship out of bounds
     if (ship.isHorizontal) {
       if (y + ship.length > this.grid.length) return false;
     } else {
       if (x + ship.length > this.grid[0].length) return false;
+    }
+
+    //Check for collision with placed ships
+    for (let i = 0; i < ship.length; i++) {
+      if (ship.isHorizontal) {
+        if (this.grid[x][y + i] !== undefined) return false;
+      } else {
+        if (this.grid[x + i][y] !== undefined) return false;
+      }
     }
 
     return true;
