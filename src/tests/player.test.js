@@ -1,6 +1,8 @@
 import Ship from '../ship';
 import Player from '../player';
 
+global.Math.random = () => 0.5;
+
 describe('Player Class', () => {
   const player = new Player('Player');
   test('name', () => {
@@ -24,5 +26,26 @@ describe('Player attack enemy board', () => {
       undefined,
       undefined,
     ]);
+  });
+});
+
+describe('Computer attacks randomly and misses', () => {
+  const player = new Player('Player');
+  const computer = new Player('Computer');
+
+  computer.attackRandomly(player);
+  test('attack randomly()', () => {
+    expect(player.board.grid[5][5]).toEqual('miss');
+  });
+});
+
+describe('Computer attacks randomly and hits', () => {
+  const player = new Player('Player');
+  const computer = new Player('Computer');
+  const ship = new Ship('battleship', 4);
+  player.board.placeShip(ship, 5, 4);
+  computer.attackRandomly(player);
+  test('attack randomly()', () => {
+    expect(ship.lives[1]).toEqual('X');
   });
 });
