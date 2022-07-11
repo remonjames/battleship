@@ -3,7 +3,6 @@ import Ship from './ship';
 class Gameboard {
   constructor(length, width) {
     this.grid = [...new Array(length)].map(() => [...new Array(width)]);
-    this.missedShots = [];
     this.ships = [];
   }
 
@@ -42,7 +41,7 @@ class Gameboard {
       let ship = this.grid[x][y].ship;
       ship.hit(this.grid[x][y].index);
     } else {
-      this.missedShots.push({ x: x, y: y });
+      this.grid[x][y] = 'miss';
     }
   }
 
